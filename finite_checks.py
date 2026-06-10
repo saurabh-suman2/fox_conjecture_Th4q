@@ -4,7 +4,7 @@ def check_finite_cases(max_n=15):
     """
     Vrifies the log-concavity of the Alexander polynomial core 
     sequence D_n(z) for finite n using the linear recurrence.
-    It explicitly calculates and outputs the minimum log-concavity 
+    It calculates and outputs the minimum log-concavity 
     margin for each n to reproduce the table in the manuscript.
     """
     z = sp.symbols('z')
