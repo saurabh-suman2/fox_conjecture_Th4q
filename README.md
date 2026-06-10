@@ -17,7 +17,7 @@ Because the continuous semialgebraic parameter space is bounded, the asymptotic 
 ### 1. `verify_four_block_smoothing.py`
 This script provides the symbolic positivity certificate for the Generalized Four-Block Smoothing Lemma.
 * **Method:** It utilizes the rational transformation $x = 4u / (1+u)$ to map the bounded parameter hypercube $[0,4]^8$ to the positive orthant $[0, \infty)^8$. 
-* **Rigor:** It computes the exact multivariable polynomials for the partial derivatives of the log-concavity discriminants $\Delta_k$ and evaluates their coefficients over $\mathbb{Z}[u_1, \dots, u_m]$. By proving all monomial coefficients are strictly positive integers, it provides a mathematically unassailable certificate that the discriminants are coordinatewise strictly increasing, forcing the global minimum to the origin.
+* **Rigor:** It computes the exact multivariable polynomials for the partial derivatives of the log-concavity discriminants $\Delta_k$ and evaluates their coefficients over $\mathbb{Z}[u_1, \dots, u_m]$. By proving all monomial coefficients are strictly positive integers, it provides an exact integer certificate that the discriminants are coordinatewise strictly increasing, forcing the global minimum to the origin.
 * **Dependencies:** `sympy`
 * **Execution Time:** ~3-4 minutes on a standard machine.
 
