@@ -8,7 +8,7 @@ The scripts provided here verify the log-concavity of the core polynomial sequen
 
 ## Related Work
 
-This paper utilizes the spectral factorization derived in the prerequisite manuscript **[Spectral Factorization and Hypergeometric Representations of the Alexander Polynomials of Th(4,2n+1)](https://arxiv.org/abs/2606.11301)**. The computational suite for that work is available [here]([Insert link to your first GitHub repo]).
+This paper utilizes the spectral factorization derived in the prerequisite manuscript **[Spectral Factorization and Hypergeometric Representations of the Alexander Polynomials of Th(4,2n+1)](https://arxiv.org/abs/2606.11301)**. The computational suite for that work is available [here](https://github.com/saurabh-suman2/Th4q-Alexander-Generating-Function).
 
 ## Mathematical Context
 
