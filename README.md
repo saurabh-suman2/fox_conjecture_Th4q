@@ -2,50 +2,168 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2606.15256-b31b1b.svg)](https://arxiv.org/abs/2606.15256)
 
-This repository contains the computer-assisted proofs accompanying the paper **[Fox's Trapezoidal Conjecture for the Four-Strand Turk's Head Knots and links](https://arxiv.org/abs/2606.15256)**. 
+This repository contains the exact symbolic certificates accompanying the paper
+**[Fox's Trapezoidal Conjecture for Four-Strand Turk's Head Knots and Links](https://arxiv.org/abs/2606.15256)**.
 
-The scripts provided here verify the log-concavity of the core polynomial sequence $D_n(z)$ associated with the Alexander polynomials of the infinite knot family $Th(4, 2n+1)$. By establishing strict log-concavity, these certificates formally complete the proof of Fox's Trapezoidal Conjecture for this family.
+The paper proves the strong form of Fox's trapezoidal conjecture for the complete
+four-strand Turk's head family
 
-## Related Work
+$$
+\operatorname{Th}(4,q)=\widehat{(\sigma_1\sigma_2^{-1}\sigma_3)^q},
+\qquad q\ge 1.
+$$
 
-This paper utilizes the spectral factorization derived in the prerequisite manuscript **[Spectral Factorization and Hypergeometric Representations of the Alexander Polynomials of Th(4,2n+1)](https://arxiv.org/abs/2606.11301)**. The computational suite for that work is available [here](https://github.com/saurabh-suman2/Th4q-Alexander-Generating-Function).
+After alternating-sign normalization, the coefficients of the one-variable
+Alexander polynomial form a positive log-concave sequence for every exponent
+$q$. Thus the result covers both the odd-exponent knots and the even-exponent
+links. For $\operatorname{Th}(4,2n+1)$, the coefficients are moreover strictly
+unimodal, so their Hirasawa--Murasugi stable length is one.
 
-## Mathematical Context
+## Structure of the proof
 
-The Alexander polynomial $A_{2n+1}(z)$ of $Th(4, 2n+1)$ factors into a uniform distribution and a squared core polynomial $D_n(z)$. The log-concavity of $D_n(z)$ is established via two distinct regimes:
+A uniform reduced-Burau calculation gives
 
-1. **The Asymptotic Regime $(n >= 16)$:** Proved via the Four-Block Smoothing Lemma, which guarantees that the discrete convolution of any four complementary trigonometric pair-blocks is log-concave.
-2. **The Finite Regime $(1 <= n <= 15)$:** Proved via direct algebraic expansion using the linear recurrence of $D_n(z)$.
+$$
+\Delta_{\operatorname{Th}(4,q)}(-z)\doteq
+(1+z+\cdots+z^{q-1})
+\prod_{\substack{\omega^q=1\\ \omega\ne 1}}
+\left(z^2+(2-\omega-\omega^{-1})z+1\right).
+$$
 
-Because the continuous semialgebraic parameter space is bounded, the asymptotic bounds are verified using a rational transformation to the positive orthant.
+Pairing reciprocal roots of unity produces reciprocal quartic blocks
 
-## Files in this Repository
+$$
+P_{a,b}(z)=(1+az+z^2)(1+bz+z^2),
+\qquad 0\le a,b\le 4,
+\qquad a+b\ge 4.
+$$
 
-### 1. `verify_four_block_smoothing.py`
-This script provides the symbolic positivity certificate for the Generalized Four-Block Smoothing Lemma.
-* **Method:** Utilizes the rational transformation $x = 4u / (1+u)$ to map the bounded parameter hypercube $[0,4]^8$ to the positive orthant $[0, \infty)^8.$ 
-* **Rigor:** Computes the exact multivariable polynomials for the partial derivatives of the log-concavity discriminants $L_k$ and evaluates their coefficients over $Z[u_1, ..., u_m, v_1, ..., v_m]$. By proving all monomial coefficients are strictly positive integers, it provides an exact integer certificate that the discriminants are coordinatewise strictly increasing, isolating the global minimum at the origin.
-* **Dependencies:** `sympy`
-* **Execution Time:** ~3-4 minutes on a standard commercial machine.
+The individual blocks need not be log-concave; in fact, the extremal block
+$P_{0,4}$ and its square and cube all fail log-concavity. The key algebraic
+statement is instead that every product of four admissible pair-blocks is
+strictly log-concave. This is the **Four-Block Smoothing Theorem**.
 
-### 2. `finite_checks.py`
-This script serves as the finite-case Wronskian verifier for the core polynomial $D_n(z)$.
-* **Method:** Generates the polynomials for $1 <= n <= 15$ utilizing the established initial conditions and the recurrence relation $D_n(z) = (1+z)^2 D_{n-1}(z) - z^2 D_{n-2}(z).$ It then directly evaluates the log-concavity condition $c_k^2 - c_{k-1}c_{k+1} > 0$ for all internal coefficients.
-* **Dependencies:** `sympy`
-* **Execution Time:** < 1 second.
+The two parity cases arise from the same geometry:
 
-## Requirements and Usage
+- For $q=2n+1$, complementary parameters satisfy $a+b>4$, giving the odd
+  interior case.
+- For $q=2n$, complementary parameters satisfy $a+b=4$, and the fixed root
+  $\omega=-1$ contributes the extra factor $z^2+4z+1$. This is the even
+  boundary case.
 
-Execution of these verification scripts requires Python 3 and the `sympy` library for symbolic mathematics.
+## Exact role of the computer certificate
+
+The code does **not** sample exponents, roots of unity, or points in a parameter
+space, and it does not numerically test the theorem for many examples.
+
+The proof in the paper first reduces the Four-Block Smoothing Theorem to a fixed
+finite certificate. For four generalized quartic blocks, there are seven
+independent log-concavity margins $L_k$, with $2\le k\le 8$. Block symmetry
+reduces coordinatewise monotonicity to the two derivatives
+
+$$
+\frac{\partial L_k}{\partial \sigma_1},
+\qquad
+\frac{\partial L_k}{\partial \eta_1}.
+$$
+
+This gives exactly **fourteen fixed derivative polynomials**. For each one, the
+script makes the rational substitution
+
+$$
+x=\frac{4u}{1+u},
+$$
+
+clears the positive denominators using the exact variablewise degrees, and
+expands the resulting polynomial on the positive orthant. It then checks that
+every nonzero coefficient is a positive integer. Consequently, the code checks
+only fourteen finite coefficient lists; the reduction from all $q$ and all
+continuous parameter choices to those lists is proved mathematically in the
+paper.
+
+All symbolic arithmetic is exact. No floating-point arithmetic, numerical root
+approximation, parameter sampling, or tolerance is used.
+
+## Files
+
+### `verify_four_block_smoothing.py`
+
+Constructs and verifies the exact positivity certificate for the Four-Block
+Smoothing Theorem.
+
+- Forms the product of four generalized reciprocal quartics.
+- Computes the seven independent margins $L_k$, $2\le k\le 8$.
+- Differentiates with respect to $\sigma_1$ and $\eta_1$; block symmetry covers
+  the remaining coordinates.
+- Applies the positive-orthant transformation and clears denominators exactly.
+- Asserts that every nonzero transformed coefficient is a positive integer.
+
+The transformed polynomial has 864 nonzero monomials for each derivative type
+when $k=2$, and 2916 for each derivative type when $3\le k\le 8$.
+
+### `finite_checks.py`
+
+Performs the exact short-range verification for the odd core polynomial
+$D_n(z)$. It generates $D_n$ for $1\le n\le 15$ from
+
+$$
+D_0(z)=1,
+\qquad
+D_1(z)=z^2+3z+1,
+$$
+
+and
+
+$$
+D_n(z)=(1+z)^2D_{n-1}(z)-z^2D_{n-2}(z),
+$$
+
+then verifies every internal strict log-concavity margin exactly.
+
+The paper also records the even-core recurrence and its exact initial range
+$1\le n\le 9$. That calculation is separate from the Four-Block certificate;
+this repository currently contains the principal Four-Block script and the odd
+initial-range checker.
+
+## Requirements and usage
+
+- Python 3
+- [`sympy`](https://www.sympy.org/)
+
+Install the dependency and run both scripts from the repository root:
+
+```bash
+python -m pip install sympy
+python verify_four_block_smoothing.py
+python finite_checks.py
+```
+
+The Four-Block certificate is substantially larger than the recurrence check
+and may take several minutes, depending on the machine. A successful run
+finishes with all exact assertions satisfied.
+
+## Relation to the spectral-factorization preprint
+
+The odd-exponent specialization of the spectral factorization first appeared in
+**[Spectral Factorization and Hypergeometric Representations of the Alexander
+Polynomials of $\operatorname{Th}(4,2n+1)$](https://arxiv.org/abs/2606.11301)**.
+The present paper proves the uniform factorization needed for both odd and even
+exponents and is self-contained. The computational material for the preliminary
+spectral work is available in the
+[`Th4q-Alexander-Generating-Function`](https://github.com/saurabh-suman2/Th4q-Alexander-Generating-Function)
+repository.
 
 ## Citation
 
-If you utilize this code or the associated mathematical framework in your work, please cite the preprint:
+If you use this code or the accompanying proof, please cite:
 
 ```bibtex
-@article{saurabh2026fox,
-  title={Fox's Trapezoidal Conjecture for the Four-Strand Turk's Head Knots and links},
-  author={Saurabh, Suman},
-  journal={arXiv preprint arXiv:2606.15256},
-  year={2026}
+@misc{saurabh2026fox,
+  author        = {Saurabh, Suman},
+  title         = {Fox's Trapezoidal Conjecture for Four-Strand Turk's Head Knots and Links},
+  year          = {2026},
+  eprint        = {2606.15256},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.GT}
 }
+```
