@@ -16,7 +16,7 @@ $$
 After alternating-sign normalization, the coefficients of the one-variable
 Alexander polynomial form a positive log-concave sequence for every exponent
 $q$. Thus the result covers both the odd-exponent knots and the even-exponent
-links. For $\operatorname{Th}(4,2n+1)$, the coefficients are moreover strictly
+links. For $Th(4,2n+1)$, the coefficients are moreover strictly
 unimodal, so their Hirasawa--Murasugi stable length is one.
 
 ## Structure of the proof
