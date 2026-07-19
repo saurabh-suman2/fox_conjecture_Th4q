@@ -1,8 +1,8 @@
-# Fox's Trapezoidal Conjecture for Four-Strand Turk's Head Knots
+# Fox's Trapezoidal Conjecture for Four-Strand Turk's Head Knots and Links
 
 [![arXiv](https://img.shields.io/badge/arXiv-2606.15256-b31b1b.svg)](https://arxiv.org/abs/2606.15256)
 
-This repository contains the computer-assisted proofs accompanying the paper **[Fox's Trapezoidal Conjecture for the Four-Strand Turk's Head Knots](https://arxiv.org/abs/2606.15256)**. 
+This repository contains the computer-assisted proofs accompanying the paper **[Fox's Trapezoidal Conjecture for the Four-Strand Turk's Head Knots and links](https://arxiv.org/abs/2606.15256)**. 
 
 The scripts provided here verify the log-concavity of the core polynomial sequence $D_n(z)$ associated with the Alexander polynomials of the infinite knot family $Th(4, 2n+1)$. By establishing strict log-concavity, these certificates formally complete the proof of Fox's Trapezoidal Conjecture for this family.
 
@@ -44,7 +44,7 @@ If you utilize this code or the associated mathematical framework in your work, 
 
 ```bibtex
 @article{saurabh2026fox,
-  title={Fox's Trapezoidal Conjecture for the Four-Strand Turk's Head Knots},
+  title={Fox's Trapezoidal Conjecture for the Four-Strand Turk's Head Knots and links},
   author={Saurabh, Suman},
   journal={arXiv preprint arXiv:2606.15256},
   year={2026}
