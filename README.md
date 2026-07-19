@@ -9,7 +9,7 @@ The paper proves the strong form of Fox's trapezoidal conjecture for the complet
 four-strand Turk's head family
 
 $$
-\operatorname{Th}(4,q)=\widehat{(\sigma_1\sigma_2^{-1}\sigma_3)^q},
+Th(4,q)=\widehat{(\sigma_1\sigma_2^{-1}\sigma_3)^q},
 \qquad q\ge 1.
 $$
 
@@ -24,7 +24,7 @@ unimodal, so their Hirasawa--Murasugi stable length is one.
 A uniform reduced-Burau calculation gives
 
 $$
-\Delta_{\operatorname{Th}(4,q)}(-z)\doteq
+\Delta_{Th(4,q)}(-z)\doteq
 (1+z+\cdots+z^{q-1})
 \prod_{\substack{\omega^q=1\\ \omega\ne 1}}
 \left(z^2+(2-\omega-\omega^{-1})z+1\right).
@@ -160,7 +160,7 @@ finishes with all exact assertions satisfied.
 The odd-exponent specialization of the spectral factorization was first
 obtained in
 **[Spectral Factorization and Hypergeometric Representations of the Alexander
-Polynomials of $\operatorname{Th}(4,2n+1)$](https://arxiv.org/abs/2606.11301)**.
+Polynomials of $Th(4,2n+1)$](https://arxiv.org/abs/2606.11301)**.
 The present paper proves the uniform factorization needed for both odd and even
 exponents and gives a self-contained proof of every result used here. The
 computational material for the preliminary spectral work is available in the
