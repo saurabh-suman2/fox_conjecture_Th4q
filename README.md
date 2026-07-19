@@ -103,8 +103,8 @@ when $k=2$, and 2916 for each derivative type when $3\le k\le 8$.
 
 ### `finite_checks.py`
 
-Performs the exact short-range verification for the odd core polynomial
-$D_n(z)$. It generates $D_n$ for $1\le n\le 15$ from
+Reproduces both exact initial-range tables in the manuscript. For the odd
+core, it generates $D_n(z)$ for $1\le n\le 15$ from
 
 $$
 D_0(z)=1,
@@ -120,10 +120,23 @@ $$
 
 then verifies every internal strict log-concavity margin exactly.
 
-The paper also records the even-core recurrence and its exact initial range
-$1\le n\le 9$. That calculation is separate from the Four-Block certificate;
-this repository currently contains the principal Four-Block script and the odd
-initial-range checker.
+For the even core it starts from
+
+$$
+E_1(z)=1,
+\qquad
+E_2(z)=(1+z)^2,
+$$
+
+uses
+
+$$
+E_n(z)=(1+z)^2E_{n-1}(z)-z^2E_{n-2}(z),
+$$
+
+and checks $1\le n\le 9$. The script asserts strict positivity of every
+internal margin and also compares the computed minimum margins with both
+tables printed in the paper. The case $E_1(z)=1$ has no internal margin.
 
 ## Requirements and usage
 
@@ -144,12 +157,13 @@ finishes with all exact assertions satisfied.
 
 ## Relation to the spectral-factorization preprint
 
-The odd-exponent specialization of the spectral factorization first appeared in
+The odd-exponent specialization of the spectral factorization was first
+obtained in
 **[Spectral Factorization and Hypergeometric Representations of the Alexander
 Polynomials of $\operatorname{Th}(4,2n+1)$](https://arxiv.org/abs/2606.11301)**.
 The present paper proves the uniform factorization needed for both odd and even
-exponents and is self-contained. The computational material for the preliminary
-spectral work is available in the
+exponents and gives a self-contained proof of every result used here. The
+computational material for the preliminary spectral work is available in the
 [`Th4q-Alexander-Generating-Function`](https://github.com/saurabh-suman2/Th4q-Alexander-Generating-Function)
 repository.
 
